@@ -20,4 +20,11 @@ listaDestinos.push(`Curitiba`) // PUSH adicionando item por ultimo a lista
 
 
 console.log(listaDestinos)
+console.log("\n")
 
+listaDestinos.splice(1, 1)  // Splice dela um item no () colcase em sequencia a posicao que vai ser deletada e a quantidade
+                            // neste caso deletou  a posicao 1(lembre-se inicia posicao 0) e quantidade 1    
+console.log(listaDestinos)    
+
+console.log(listaDestinos[1]) // acessando elemento especifico da lista
+                            

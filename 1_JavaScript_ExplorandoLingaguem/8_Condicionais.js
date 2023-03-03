@@ -42,6 +42,33 @@ if(idadeComprador > 18){
         console.log("Não pode comprar")
     
     }
-   
+
+console.log("\n")
+
+    if(idadeComprador > 18 && estaAcompanhada == true){
+        // amior de idade
+        console.log("Pode Comprar o imóvel")
+        listaDestinos.splice(2,1) // removendo item
+
+    } else {
+    
+            // menor de idade
+            console.log("Não pode comprar")
+
+    }
 
 
+
+console.log("\n")
+
+    if(idadeComprador > 18 || estaAcompanhada == true){
+        // amior de idade
+        console.log("Pode Comprar o imóvel")
+        listaDestinos.splice(2,1) // removendo item
+
+    } else {
+    
+            // menor de idade
+            console.log("Não pode comprar")
+
+    }

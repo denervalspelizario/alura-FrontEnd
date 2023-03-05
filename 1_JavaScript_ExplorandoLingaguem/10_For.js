@@ -15,31 +15,23 @@ let idadeComprador = 18
 let estaAcompanhada = true
 let temPassagemComprada = false
 const destino = `São Paulo`
-let index = 0
 
 
 const podeComprar = idadeComprador > 18 && estaAcompanhada == true
-let destinoExiste = true
+let destinoExiste = false
 
-while ( index < 3){
-
-    
+for ( let index = 1; index < 3; index ++){
 
     if(listaDestinos[index] == destino){
         console.log("Destino Existe")
-        destinoExiste = false
+        destinoExiste = true
         break;
     }
     
-    index += 1
+
 }
 
 console.log("Destino existe " + destinoExiste)
 
-console.log("\n")
 
-if(podeComprar && destinoExiste){
-    console.log("Boa Viagem")
-}else {
-    console.log("Desculpe tivemos um erro")
-}
+

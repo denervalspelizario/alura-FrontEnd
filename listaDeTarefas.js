@@ -4,13 +4,30 @@ const criarTarefa = (evento) => { // funcao disparada apó o clique (ler linha 2
    evento.preventDefault() // funcao que garante o comportamento padrao essa funcao garante o msm comportamento em diferentes
                            // browser evitando comprtamento diferentes entre browsers 
 
-   const  input =  document.querySelector('[data-form-input]') // variavel que recebe dom de item input (linha 25 de index.html)
+   // acesso ao dom                        
+   const lista = document.querySelector('[data-list]')
 
+   // acesso ao elemento input
+   const  input =  document.querySelector('[data-form-input]') // variavel que recebe dom de item input (linha 25 de index.html)
+   
+   // acesso ao dado digitado no input
    const valor = input.value // variavel valor recebe dado(value) de input digitado ou seja foi digitado algo este valor sera 
                                   // recebido por esta variável     
 
-   console.log(valor) // imprimi no console o valor(value) digitado no input(linha 13) 
 
+   // criacao de adicao de elemento(li) com a resposta do input
+                                    
+   const tarefa = document.createElement('li')    // createElemente funcao para criar elemento, variavel que recebe elemento criado lista(li)     
+   tarefa.classList.add('task') // a variavel tarefa adicionando class de css ao elelemto no caso li ou seja a li terá classe task                     
+   
+   const conteudo = `<p class='content'> ${valor}</p>` // variavel que recebe um template string com um paragrafo que tem a variavel valor(linha 9)
+
+   tarefa.innerHTML = conteudo // ou seja tarefa(linha 16) recebe conteudo(linha 18 paragrafo comvalor de input)
+
+   lista.appendChild(tarefa) // estou adicionado a lista(que recebe todo o dom linha 7) o filho tarefa(linha 20)
+   // o appendChild vai sempre adicionar um nó e sempre aparecerá por ultimo na lista neste caso
+
+   input.value = ''
 }
 
 

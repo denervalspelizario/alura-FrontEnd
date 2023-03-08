@@ -24,6 +24,7 @@ const criarTarefa = (evento) => { // funcao disparada apó o clique (ler linha 2
 
    tarefa.innerHTML = conteudo // ou seja tarefa(linha 16) recebe conteudo(linha 18 paragrafo comvalor de input)
 
+   tarefa.appendChild(BotaoConclui()) // estou adicionando a const tarefa um filho que é a funcao botaoConclui(linha 52)
    lista.appendChild(tarefa) // estou adicionado a lista(que recebe todo o dom linha 7) o filho tarefa(linha 20)
    // o appendChild vai sempre adicionar um nó e sempre aparecerá por ultimo na lista neste caso
 
@@ -45,12 +46,32 @@ novaTarefa.addEventListener('click', criarTarefa)  // na funcao recebe o click (
                                                    // addEventListener para escutar eventos no elemento
 
 
- /*
-    Explicando  pega-se o elemento formulario atravez do dom e adiciona em uma variável novaTarefa
-    nesta variavel adiciona um evento atravez do addEventlistener  que tem 2 parametros 
-    1 parametro será o click
-    2 parametro a ação, que atravez do dom a variavel input recebe o elemento input
-      e depois  adiciona na variável valor o dado que foi digitado no input
-    E depois da variável pegar o dado digitado é impressa por um clg   
- */
+// criando componente para conclusão de tarefa
 
+
+const BotaoConclui = () => { // funcao anonima 
+
+   const botaoConclui = document.createElement('button') // createElemente funcao para criar elemento, variavel que recebe elemento criado button   
+   
+   botaoConclui.innerText = 'concluir' // adicionando texto ao button
+   botaoConclui.classList.add('check-button') // a variavel botaoConclui adicionando class de css ao elemento no caso o button ou seja a button terá classe check-button    
+
+
+   botaoConclui.addEventListener('click', concluirTarefa)
+
+   return botaoConclui
+
+}
+
+
+concluirTarefa = (evento) => {
+
+   const botaoConclui = evento.target  // target para acessar um alvo(descobrir o elemento) no caso o alvo que foi clicado 
+
+   const tarefaCompleta = botaoConclui.parentElement  // depois de descobrir o elemento o parentElemente acessa o pai do elemento 
+                                                      // no caso o pai do botão  é a li(linha 20) a li que foi adicionada com dado do input 
+
+   tarefaCompleta.classList.toggle('done') // ao acessar esse pai(li) ele acessa sua classe e joga a propriedade done(que no caso é um traço)
+                                           
+   //  Ou seja ao clicar no botao que fica lado da li ele risca o texto da li com um traço
+} 

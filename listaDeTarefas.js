@@ -1,4 +1,6 @@
 
+( () => {
+
 const criarTarefa = (evento) => { // funcao disparada apó o clique (ler linha 20)
 
    evento.preventDefault() // funcao que garante o comportamento padrao essa funcao garante o msm comportamento em diferentes
@@ -25,8 +27,11 @@ const criarTarefa = (evento) => { // funcao disparada apó o clique (ler linha 2
    tarefa.innerHTML = conteudo // ou seja tarefa(linha 16) recebe conteudo(linha 18 paragrafo comvalor de input)
 
    tarefa.appendChild(BotaoConclui()) // estou adicionando a const tarefa um filho que é a funcao botaoConclui(linha 52)
+   tarefa.appendChild(BotaoDeleta())  // adicionando como filho a tarefa botao de exclusao de li
    lista.appendChild(tarefa) // estou adicionado a lista(que recebe todo o dom linha 7) o filho tarefa(linha 20)
    // o appendChild vai sempre adicionar um nó e sempre aparecerá por ultimo na lista neste caso
+
+   
 
    input.value = ''
 }
@@ -75,3 +80,31 @@ concluirTarefa = (evento) => {
                                            
    //  Ou seja ao clicar no botao que fica lado da li ele risca o texto da li com um traço
 } 
+
+const BotaoDeleta = () => {  // componente sempre letra maiuscula, 
+
+   const botaoDeleta = document.createElement('button') // criando elemento botao
+
+   botaoDeleta.innerText = 'deletar' // adicionao ao elemento criado o texto deletar
+
+   botaoDeleta.addEventListener('click', deletarTarefa)  // adicionando ao elemento o evento de click e dispara funcao deletarTarefa
+  
+
+   return botaoDeleta  // tem que colocar o return senao nao vai renderizar o componente criado
+ 
+} 
+
+const deletarTarefa = (evento) => {
+
+   const botaoDeleta = evento.target
+   
+   const tarefaCompleta = botaoDeleta.parentElement   // pegando elemento pai de botao que neste caso é a li
+
+   tarefaCompleta.remove()// ou seja ao clicar(linha 90) dispara o evento deletar tarefa que pega o elemento pai de botaoDeletar que é a li digitada(31) de deleta com a funcao remove()
+
+   return botaoDeleta
+
+}
+
+
+})() // todo o codigo vai estar dentro de uma função anonima que vai ser executado no momento a inicializacao atravez destas () no final

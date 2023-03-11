@@ -24,19 +24,19 @@
                 <fieldset>
                     <div class="input-container" >
                         <input name="nome" id="nome" class="input" type="text" placeholder="Nome"
-                            required 
+                            required data-tipo="nome"
                         >
                         <label class="input-label" for="nome">Nome</label>
                         <span class="input-mensagem-erro">Este campo não está válido</span>
                     </div>
                     <div class="input-container">
-                        <input name="email" id="email" class="input" type="email" placeholder="Email" required>
+                        <input name="email" id="email" class="input" type="email" placeholder="Email"  data-tipo="email"  required>
                         <label class="input-label" for="email">Email</label>
                         <span class="input-mensagem-erro">Este campo não está válido</span>
                     </div>
                     <div class="input-container">                                                           <!--regex para validacao tem no google regex lib-->      
                         <input name="senha" id="senha" class="input" type="password" placeholder="Senha" pattern="^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$"
-                            title="A senha deve conter 6 a 12 caracteres e precisa de 1 numero e 1 letra"  required     
+                            title="A senha deve conter 6 a 12 caracteres e precisa de 1 numero e 1 letra" data-tipo="senha"   required     
                         >
                         <label class="input-label" for="senha">Senha</label>
                         <span class="input-mensagem-erro">Este campo não está válido</span>

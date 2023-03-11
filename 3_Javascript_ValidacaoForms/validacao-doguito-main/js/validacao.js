@@ -10,21 +10,73 @@ export function valida(input) { // funcao de validacao do input que será export
     if(input.validity.valid){ // funcao que caso user clicar e input não estiver valido o input o campo fica vermelho
 
        input.parentElement.classList.remove('input-container--invalido') 
+       input.parentElement.querySelector('.input-mensagem-erro').innerHTML = ''
 
     } else {
 
         input.parentElement.classList.add('input-container--invalido') // input naoe stando valido adiciona classe que avermelha input
+        input.parentElement.querySelector('.input-mensagem-erro').innerHTML = mostraMensagemDeErro(tipoDeInput, input)
 
     }
 }
 
 
+const tiposDeErro = [
 
+    'valueMissing',
+    'typeMismatch',
+    'patternMismatch',
+    'customError',
 
+]
+
+// mensagens de erros customizadas
+const mensagensDeErro = {  // erros dos inputs
+
+    nome: {
+
+        valueMissing: 'O campo nome não pode estar vazio',
+
+    },
+    email: {
+
+        valueMissing: 'o campo de email não pode estar vazio.',
+        typeMismatch: 'O email digitado não é valido.'
+    },
+    senha: {
+
+        valueMissing: 'o campo de senha não pode estar vazio.',
+        patternMismatch: 'A senha deve conter 6 a 12 caracteres e precisa de 1 numero e 1 letra'
+
+    },
+    dataNascimento: {
+
+        valueMissing: 'o campo de data nascimento não pode estar vazio.',
+        customError: 'Você deve ser maior de 18 anos para se cadastrar',
+        
+    }    
+}
 
 const validadores = {
     dataNascimento:input => validaDataNascimento(input) // recebendo o data-tipo la do html (linha 49 de cadastro.html)
 }
+
+
+function mostraMensagemDeErro(tipoDeInput, input ){
+
+    let mensagem = ''
+    tiposDeErro.forEach(erro => {
+        if(input.validity[erro]){
+            
+            mensagem = mensagensDeErro[tipoDeInput][erro]
+        
+        }
+
+    })
+    return mensagem
+
+}
+
 
 function validaDataNascimento(input) {
     const dataRecebida = new Date(input.value) // constante recebe dado de data de nacimento pelo input do formulario

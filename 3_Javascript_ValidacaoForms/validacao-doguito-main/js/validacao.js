@@ -54,11 +54,18 @@ const mensagensDeErro = {  // erros dos inputs
         valueMissing: 'o campo de data nascimento não pode estar vazio.',
         customError: 'Você deve ser maior de 18 anos para se cadastrar',
         
-    }    
+    },
+    cpf: {
+
+        valueMissing: 'O campo de cpf não pode estar vazio.',
+        customError: 'O cpf digitado não é valido',
+        
+    }      
 }
 
 const validadores = {
-    dataNascimento:input => validaDataNascimento(input) // recebendo o data-tipo la do html (linha 49 de cadastro.html)
+    dataNascimento:input => validaDataNascimento(input), // recebendo o data-tipo la do html (linha 49 de cadastro.html)
+    cpf:input => validaCPF(input) // funcao de validacao de cpf (linha 103)
 }
 
 
@@ -94,4 +101,59 @@ function maiorQue18(data) {   // funcao com estrutura para ver se é maior de 18
     const dataMais18 = new Date(data.getUTCFullYear() + 18, data.getUTCMonth(), data.getUTCDate()) // recebe data com menos - 18 anos
 
     return dataMais18 <= dataAtual // checando se dataMais18 é menor ou igual a dataAtual 
+} 
+
+
+// funcao para validacao do cpf que sera adicionada(chamada) la na funcao validadores(linha 61)
+
+function validaCPF(input){ // funcao recebe dado input
+
+    const cpfFormatado = input.value.replace(/\D/g, '')  // variavel recebe dado do input e substituir tudo que não for digito
+                                                         // dai usamo a replace(substitui) e a regex que diz  do dado recebido
+                                                         // tudo que NÂO for numero será substituido por ''(vazio) ou seja só sobrara numero
+                                                         // assim vc pode digitar o cpf como quiser que o input só vai ler os digitos             
+
+    let mensagem = ''
+
+    if(!checaCPFRepetido(cpfFormatado)){ // confere se der igual manda a mensagem de erro
+
+        mensagem = 'O CPF digitado não é valido'
+
+    }
+
+    input.setCustomValidity(mensagem)
+
+}
+
+// funcao para verificar repeticao no cpf
+
+function checaCPFRepetido(cpf){  // recebe cpf(dado do input)
+
+    const valoresRepetidos = [  // valore repetidos
+        '00000000000',
+        '11111111111',
+        '22222222222',
+        '33333333333',
+        '44444444444',
+        '55555555555',
+        '66666666666',
+        '77777777777',
+        '88888888888',
+        '99999999999'
+    ]
+
+    let cpfValido = true
+
+    valoresRepetidos.forEach(valor => {   // pega o dado do input(cpf) e compara com todos os dados da variavel valoresRepetidos
+
+        if(valor == cpf){    // se algum for igual altera a varialvel cpfValido para false que la em cima(linha 11) faz um evento
+
+            cpfValido = false
+        
+        }
+
+    })
+
+    return cpfValido
+
 }

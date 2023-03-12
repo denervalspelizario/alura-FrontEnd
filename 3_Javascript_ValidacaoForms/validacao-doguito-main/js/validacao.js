@@ -115,7 +115,7 @@ function validaCPF(input){ // funcao recebe dado input
 
     let mensagem = ''
 
-    if(!checaCPFRepetido(cpfFormatado)){ // confere se der igual manda a mensagem de erro
+    if(!checaCPFRepetido(cpfFormatado) || !checaEstuturaCPF(cpfFormatado)){ // confere se der igual manda a mensagem de erro
 
         mensagem = 'O CPF digitado não é valido'
 
@@ -148,6 +148,8 @@ function checaCPFRepetido(cpf){  // recebe cpf(dado do input)
 
         if(valor == cpf){    // se algum for igual altera a varialvel cpfValido para false que la em cima(linha 11) faz um evento
 
+            const multiplicador = 10
+
             cpfValido = false
         
         }
@@ -155,5 +157,53 @@ function checaCPFRepetido(cpf){  // recebe cpf(dado do input)
     })
 
     return cpfValido
+}
+
+// normalmente um cpf se faz validcao por ap mas como estamos sem ela vamos fazer na mao 
+
+//let soma = (10 * 1) + (9 * 2) + (8* 3) + ...(2 * 9)
+
+//let digitoVerificador = 11 (soma % 11)
+
+function checaEstuturaCPF(cpf){
+
+    return checaDigitoVerificador(cpf, multiplicador)
 
 }
+
+function checaDigitoVerificador(cpf, multiplicador){
+
+    if(multiplicador >= 12){
+        return true
+    }
+
+    let multiplicadorInicial = multiplicador
+    let soma = 0
+    const cpfSemDigitos = cpf.substr(0, multiplicador - 1).split('')
+    const digitoVerificador = cpf.charAt(multiplicador - 1)
+    
+    for(let contador = 0; multiplicadorInicial > 1 ; multiplicadorInicial--){
+
+        soma = soma + cpfSemDigitos[contador] * multiplicadorInicial
+        contador++
+
+    }
+
+    if(digitoVerificador == confirmaDigito(soma)){
+
+        return checaDigitoVerificador(cpf, multiplicador + 1)
+
+    } else {
+
+        return false
+    }
+
+   
+}
+
+
+function confirmaDigito(soma){
+
+    return 11 - (soma % 11)
+
+} 

@@ -93,7 +93,7 @@ const mensagensDeErro = {  // erros dos inputs
 const validadores = {
     dataNascimento:input => validaDataNascimento(input), // recebendo o data-tipo la do html (linha 49 de cadastro.html)
     cpf:input => validaCPF(input), // funcao de validacao de cpf (linha 103)
-    cep:input => recuperarCEP(input)
+    cep:input => recuperarCEP(input) // recebendo o data la do html
 }
 
 

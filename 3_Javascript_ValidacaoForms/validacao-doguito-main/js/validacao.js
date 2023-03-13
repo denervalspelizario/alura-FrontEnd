@@ -82,7 +82,12 @@ const mensagensDeErro = {  // erros dos inputs
 
         valueMissing: 'O campo de cep não pode estar vazio.',
         
-    }  
+    },
+    preco: {
+
+        valueMissing: 'O campo de preço não pode estar vazio.',
+        
+    }   
 }
 
 const validadores = {
